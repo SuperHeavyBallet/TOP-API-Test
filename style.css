@@ -1,0 +1,25 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+body > h5,
+body > h4{
+    padding: 0;
+    margin: 1vh 0 1vh 0;
+}
+
+body > img{
+    padding: 1vh;
+    background-color: #000000;
+}
+
+body > button{
+    margin: 1vh;
+}
