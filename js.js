@@ -24,6 +24,17 @@ function getImage(searchTerm){
         .catch(function (error) {
             console.error('Error during fetch:', error);
         })
+        
+    }
+
+    // Test Refactoring with async/await
+    async function getCats(){
+
+        
+        const response = await fetch(`https://api.giphy.com/v1/gifs/translate?api_key=E2ET6vZ00hUX8Go2d6mucfSJ6r6DvDXU&s=cats`, { mode: "cors"});
+        const catData = await response.json();
+        img.src = (catData.data.images.original.url);
+
     }
 
     regenButton.addEventListener('click', () => {
