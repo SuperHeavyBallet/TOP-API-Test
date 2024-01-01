@@ -8,7 +8,8 @@ let tmpSearchTerm = "";
 
 getImage("nothing");
 
-function getImage(searchTerm){
+// old function using promises
+function OldgetImage(searchTerm){
         fetch(`https://api.giphy.com/v1/gifs/translate?api_key=E2ET6vZ00hUX8Go2d6mucfSJ6r6DvDXU&s=${searchTerm}`, { mode: "cors"})
         .then(function(response) {
 
@@ -27,13 +28,24 @@ function getImage(searchTerm){
         
     }
 
-    // Test Refactoring with async/await
-    async function getCats(){
+// New function using async/await
+    async function getImage(searchTerm){
 
+        try {
+            const response = await fetch(`https://api.giphy.com/v1/gifs/translate?api_key=E2ET6vZ00hUX8Go2d6mucfSJ6r6DvDXU&s=${searchTerm}`, { mode: "cors"});
+            
+            if (!response.ok){
+                throw new Error(`Network response was not ok; Status: ${response.status}`);
+            }
+
+            const responseData = await response.json();
+            img.src = (responseData.data.images.original.url);
+
+        } catch (error) {
+            console.error('Error during fetch:', error);
+        }
         
-        const response = await fetch(`https://api.giphy.com/v1/gifs/translate?api_key=E2ET6vZ00hUX8Go2d6mucfSJ6r6DvDXU&s=cats`, { mode: "cors"});
-        const catData = await response.json();
-        img.src = (catData.data.images.original.url);
+        
 
     }
 
